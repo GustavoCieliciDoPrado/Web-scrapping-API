@@ -1,11 +1,9 @@
-<h1>Database Setup</h1>
+CREATE DATABASE property_predict_data;
+\c property_predict_data
+CREATE TABLE property(pp_id integer, bname varchar(30), sname varchar(40), pcode varchar(10), streetname varchar(30), PRIMARY KEY (pp_id));
 
-<p>This is the screenshots for the setup of the database. <br>
-I will connect my Python pipeline to the Database once I have successfuly created it and tested it.</p>
+CREATE TABLE tx_history(tx_id varchar(30), pp_id int, sold_date date, pp_svalue int, PRIMARY KEY(tx_id), FOREIGN KEY(pp_id) REFERENCES property(pp_id));
 
-<h2>Table Creation</h2>
-<p><img width="1200" height="398" alt="image" src="https://github.com/user-attachments/assets/4a9715aa-847c-4205-ae8b-67e65de5d974" />
-  <img width="2072" height="328" alt="image" src="https://github.com/user-attachments/assets/9c8b8acc-2546-4741-b3d5-91f85fdf7d85" />
-  <img width="2192" height="63" alt="image" src="https://github.com/user-attachments/assets/3a9f308c-b5f5-41ab-ac46-6fe2d13d759b" />
-  <img width="1075" height="349" alt="image" src="https://github.com/user-attachments/assets/fc3fe820-a8df-45c6-a659-bf9f6282e5fb" />
-</p>
+CREATE TABLE pp_proj_value(pp_id int, es_time_range varchar(40), es_ppvalue int, FOREIGN KEY(pp_id) REFERENCES property(pp_id));
+
+CREATE TABLE p_atributes(pp_id int, pp_type char(20), es_type char(15), n_blt char(5), FOREIGN KEY(pp_id) REFERENCES property(pp_id));
